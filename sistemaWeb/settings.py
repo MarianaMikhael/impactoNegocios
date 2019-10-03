@@ -74,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'impactoNegocios.wsgi.application'
+WSGI_APPLICATION = 'sistemaWeb.wsgi.application'
 
 
 # Database
