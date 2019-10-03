@@ -17,12 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib.auth import views as auth_views
 
 from account import urls as urls_account
+from systems import urls as urls_systems
 
 urlpatterns = [
     path('', include(urls_account)),
+    path('sistemas/', include(urls_systems)),
     path('admin/', admin.site.urls, name='url_admin')
 ]
 
