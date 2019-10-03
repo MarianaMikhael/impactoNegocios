@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load static %}
+
+{% block scripts %}
+
+    <script src="{% static 'js/utils.js' %}"></script>
+
+{% endblock %}
+
+{% block title %} Sistemas | Cadastro {% endblock %}
+
+{% block main %}
+
+
+
+    <div class="erros"> </div>
+    <!--enctype faz o envio de fotos ou arquivos em geral através
+    do form, sem ele só é possível envio de texto, sem anexo.-->
+
+    <form method="POST" id="cadastro-systems" enctype="multipart/form-data">
+        {% csrf_token %}
+        <ul id='progress'>
+            <li class="ativo">Áreas Responsáveis</li>
+            <li>Recursos Dedicados</li>
+            <li>Criticidade</li>
+            <li>Sistema</li>
+            <li>Contingência</li>
+            <li>Continuidade Tecnológica</li>
+            <li>Continuidade Arquitetura</li>
+            <li>Impactos</li>
+            <li>Fronteiras e Dependências</li>
+        </ul>
+        
+        <fieldset>
+            <h2>Áreas Responsáveis</h2>
+            {{ form_cadeia_servico }}
+            {{ form_area_desenvolvimento }}
+            {{ form_area_suporte }}
+            <input type="button" name="next1" class="next acao" value="Próximo" />
+        </fieldset>
+
+        <fieldset>
+            <h2>Recursos Dedicados</h2>
+            {{ form_responsavel_desenvolvimento }}
+            {{ form_responsavel_suporte }}
+            <input type="button" name="prev" class="prev acao" value="Anterior" />
+            <input type="button" name="next2" class="next acao" value="Próximo" />
+        </fieldset>
+
+        <fieldset>
+            <h2>Criticidade</h2>
+            {{ form_criticidade_suporte }}
+            <input type="button" name="prev" class="prev acao" value="Anterior" />
+            <input type="button" name="next3" class="next acao" value="Próximo" />
+        </fieldset>
+
+        <fieldset>
+            <h2>Sistema</h2>
+            {{ form_sistema }}
+            {{ form_sistema_servico }}
+            {{ form_sistema_janelas }}
+            <input type="button" name="prev" class="prev acao" value="Anterior" />
+            <input type="button" name="next4" class="next acao" value="Próximo" />
+        </fieldset>
+
+        <fieldset>
+            <h2>Contingência</h2>
+            {{ form_contingencia }}
+            {{ form_contingencia_arquitetura }}
+            {{ form_contingencia_usuario }}
+            <input type="button" name="prev" class="prev acao" value="Anterior" />
+            <input type="button" name="next5" class="next acao" value="Próximo" />
+        </fieldset>
+
+        <fieldset>
+            <h2>Continuidade Tecnológica</h2>
+            {{ form_continuidade_tecnologica }}
+            <input type="button" name="prev" class="prev acao" value="Anterior" />
+            <input type="button" name="next6" class="next acao" value="Próximo" />
+        </fieldset>
+
+        <fieldset>
+            <h2>Continuidade Arquitetura</h2>
+            {{ form_cont_tecnologica_sites }}
+            <input type="button" name="prev" class="prev acao" value="Anterior" />
+            <input type="button" name="next7" class="next acao" value="Próximo" />
+        </fieldset>
+
+        <fieldset>
+            <h2>Impactos</h2>
+            {{ form_impacto }}
+            <input type="button" name="prev" class="prev acao" value="Anterior" />
+            <input type="button" name="next8" class="next acao" value="Próximo" />
+        </fieldset>
+
+        <fieldset>
+            <h2>Fronteiras e Depedências</h2>
+            {{ form_impacto_dependencias }}
+            {{ form_impacto_fronteiras }}
+            {{ form_impactos_potenciais }}
+            {{ form_impacto_usuarios }}
+            <input type="button" name="prev" class="prev acao" value="Anterior" />
+            <button type="submit" class="acao salvar">Salvar</button>
+        </fieldset>
+
+        <div class="row text-uppercase">
+            <div class="col" id="novo-cadastro" align="right">
+                <a href="{% url 'index_sistemas' %}" class="btn">Voltar</a>
+            </div>
+        </div>
+        
+    </form>
+
+
+<!--
+   
+        <div class="row">
+            <div class="col" id="btn-salvar-cadastro-19" align="right">
+                <button type="submit" class="btn btn-success text-uppercase">salvar</button>
+            </div>
+        </div>
+
+-->
+
+{% endblock %}

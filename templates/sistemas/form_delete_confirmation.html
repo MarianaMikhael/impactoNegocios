@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Sistemas | Deletar Cadastro {% endblock %}
+
+
+{% block main %}
+
+    <h3 align="center">Tem certeza que deseja deletar {{ sistema.nome_Aplicacao }}?</h3>
+    
+    <form method="POST" id="form-delete" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="row">
+            <div class="col-sm" id="delete-cadastro" align="right">
+                <button type="submit" class="btn btn-danger text-uppercase">deletar</button>
+            </div>
+            <div class="col-sm" id="return-cadastro" align="left">
+                <a href="{% url 'index_sistemas' %}" class="btn btn-primary text-uppercase">voltar</a>
+            </div>
+        </div>
+    </form>
+    
+{% endblock %}
