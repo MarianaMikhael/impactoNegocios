@@ -1,5 +1,5 @@
 """
-WSGI config for sistemaWeb project.
+WSGI config for impactoNegocios project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,9 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sistemaWeb.settings')
+from dj_static import Cling
 
-application = get_wsgi_application()
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'impactoNegocios.settings')
+
+application = Cling(get_wsgi_application())
+
