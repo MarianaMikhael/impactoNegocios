@@ -7,11 +7,9 @@ import re
 from django.core import validators
 from django.utils import timezone
 from django.core.mail import send_mail
-from django.utils.http import urlquote
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin, BaseUserManager
-from django.conf import settings
 
 
 class UserManager(BaseUserManager):
@@ -43,7 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     username = models.CharField(_('username'), max_length=15, unique=True,
                                 null=False, blank=False)
-    password = models.CharField(_('password'), max_length=255)
+    password = models.CharField(_('password'), max_length=128)
     first_name = models.CharField(_('first name'), max_length=30,
                                   null=False, blank=False)
     last_name = models.CharField(_('last name'), max_length=30,
