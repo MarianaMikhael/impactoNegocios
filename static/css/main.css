@@ -11,14 +11,26 @@ body {
   	font-family: 'Numans', sans-serif;
 }
 
-nav#topo {
-  width: 100%;
-  height: 50px;
-  background-color: #1B2631;
+nav#navbar-default {
+  background-color: rgba(27, 38, 49, 0.7);
 }
-nav#topo p {
+nav#navbar-default p {
   color: white;
+  margin: 0;
   position: center;
+}
+nav#navbar-default a {
+  color: red;
+  font-size: 14px;
+  margin: 0 0 0 5px;
+}
+.navbar-brand {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#content-page {
+  padding-block-start: 70px;
 }
 
 .btn {
@@ -121,7 +133,7 @@ input:focus{
   font: 14px 'Numans';
 }
 
-#cadastro-systems input, button, select, textarea {
+#cadastro-systems input, select, textarea {
   padding: 10px;
   border: 1px solid #B2BABB;
   border-radius: 4px;
