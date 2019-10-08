@@ -4,7 +4,7 @@
         var atual_fs, next_fs, prev_fs;
         var formulario = $('form[id=cadastro-systems]');
 
-        /*----------------------------------------Barra de progress, próximo----------------------------------------*/
+        /*----------------------------------------Barra de progress, próximo*/
         $('.next').click(function(){
             atual_fs = $(this).parent();
             next_fs = $(this).parent().next();
@@ -14,7 +14,7 @@
             next_fs.show(800);
         });
 
-        /*----------------------------------------Barra de progress, anterior----------------------------------------*/
+        /*----------------------------------------Barra de progress, anterior*/
         $('.prev').click(function(){
             atual_fs = $(this).parent();
             prev_fs = $(this).parent().prev();

@@ -20,13 +20,13 @@ nav#navbar-default p {
   position: center;
 }
 nav#navbar-default a {
-  color: red;
+  color: #3366FF;
   font-size: 14px;
   margin: 0 0 0 5px;
 }
 .navbar-brand {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 #content-page {
@@ -98,7 +98,7 @@ input:focus{
 }
 
 #cadastro-systems h2 {
-  font: 22px 'Numans';
+  font: 20px 'Numans';
   color: #1B2631;
   width: 100%;
   float: left;
@@ -120,7 +120,6 @@ input:focus{
   box-sizing: border-box;
   width: 80%;
   margin: 0 10% 3%;
-  /* position: absolute; */
 }
 
 #cadastro-systems fieldset:not(:first-of-type) {
@@ -175,7 +174,7 @@ input:focus{
 #cadastro-systems #progress {
   margin-bottom: 30px;
   overflow: hidden;
-  width: 700px;
+  width: 50%;
   margin: auto;
   padding: 3%;
   counter-reset: step;
@@ -186,7 +185,7 @@ input:focus{
   color: #1B2631;
   font-weight: bold;
   text-transform: uppercase;
-  font-size: 8px;
+  font-size: 10px;
   float: left;
   width: 11.11%;
   position: relative;
@@ -194,13 +193,14 @@ input:focus{
 
 #cadastro-systems #progress li:after {
   content: '';
-  width: 50px;
+  width: 100%;
   background: #B2BABB;
-  height: 3px;
+  height: 2px;
   position: absolute;
   top: 9px;
   left: -50%;
   margin-left: 10px;
+  z-index: -1;
 }
 
 #cadastro-systems #progress li:before {
