@@ -8,7 +8,6 @@ body {
     background-size: cover;
 	  color:#fff;
   	background-color:#333;
-  	font-family: 'Numans', sans-serif;
 }
 
 nav#navbar-default {
@@ -33,16 +32,19 @@ nav#navbar-default a {
   padding-block-start: 70px;
 }
 
+button,
 .btn {
-  width: auto;
+  width: 100px;
   height: 43px;
   background: #3366FF;
   color: white;
-  text-transform: uppercase;
   padding: 10px 10px;
   margin-block-end: 10px;
+  border-radius: 5px;
+  font-family: 'Numans', sans-serif;
 }
 
+button:hover,
 .btn:hover {
   background: #0000FF;
   color: white;
@@ -95,6 +97,7 @@ input:focus{
   width: auto;
   text-align: center;
   position: relative;
+  font-family: 'Numans', sans-serif;
 }
 
 #cadastro-systems h2 {
