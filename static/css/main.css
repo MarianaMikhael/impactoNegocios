@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
+html {
+  height: 100%;
+}
+
 body {
     background: url('../images/background.png') no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -10,26 +14,19 @@ body {
   	background-color:#333;
 }
 
-nav#navbar-default {
-  background-color: rgba(27, 38, 49, 0.7);
-}
-nav#navbar-default p {
-  color: white;
-  margin: 0;
-  position: center;
-}
-nav#navbar-default a {
-  color: #3366FF;
-  font-size: 14px;
-  margin: 0 0 0 5px;
-}
-.navbar-brand {
-  font-weight: bold;
-  font-size: 22px;
+p, a, span,
+h1, h2, h3, h4, h5, h6,
+label, input, select, textarea, button {
+  font-family: 'Numans', sans-serif;
 }
 
-#content-page {
-  padding-block-start: 70px;
+a:hover {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+b {
+  font-weight: bold;
 }
 
 button,
@@ -41,13 +38,97 @@ button,
   padding: 10px 10px;
   margin-block-end: 10px;
   border-radius: 5px;
-  font-family: 'Numans', sans-serif;
 }
 
 button:hover,
 .btn:hover {
   background: #0000FF;
   color: white;
+}
+
+/*------------------------------------------Navbar------------------------------------------*/
+nav#navbar-default {
+  background-color: rgba(27, 38, 49, 0.7);
+}
+nav#navbar-default p {
+  color: white;
+  margin: 0;
+  position: center;
+}
+nav#navbar-default a {
+  color: #3366FF;
+  font-size: 11px;
+  margin: 0 0 0 5px;
+  text-transform: uppercase;
+}
+.navbar-brand {
+  font-size: 22px;
+}
+.navbar-text {
+  height: 43px;
+  font-size: 14px;
+}
+.navbar-toggler {
+  width: auto;
+}
+.navbar-toggler:hover {
+  background: none;
+}
+
+/*------------------------------------Container Page-Into-----------------------------------*/
+#content-page {
+  padding-block-start: 70px;
+}
+
+/*------------------------------------------Footer------------------------------------------*/
+.footer {
+  padding-block-end: 1%;
+  text-align: center;
+  font-size: 10px;
+}
+
+/*----------------------------------------Seta Topo----------------------------------------*/
+#seta-topo {
+  color: #fff !important;
+  display: block;
+  position: fixed;
+  right: 15px;
+  bottom: 1%;
+  z-index: 799;
+  width: 54px;
+  height: 54px;
+  line-height: 44px;
+  border: 5px solid;
+  border-radius: 50%;
+  background: linear-gradient(100deg,blue,crimson,purple); /*Change colors as you want*/
+  background-size: 1000% 1000% !important;
+  -webkit-animation: changeColors 30s ease infinite;
+  -moz-animation: changeColors 30s ease infinite;
+  -o-animation: changeColors 30s ease infinite;
+  animation: changeColors 30s ease infinite;
+}
+
+@-webkit-keyframes changeColors {
+  0% {
+      background-position: 0 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0 50%;
+  }
+}
+
+/*-------------------------------------Login Card ERROR-------------------------------------*/
+.label-danger {
+  background-color:  rgba(255, 255, 0, 0.5);
+  text-align: center;
+}
+.text-danger-login {
+  color: red;
+  font-size: 10px;
+  text-align: center;
 }
 
 /*----------------------------------------Login Card----------------------------------------*/
@@ -144,16 +225,16 @@ input:focus{
   outline-color: #1B2631;
   box-sizing: border-box;
   width: 100%;
-  font: 14px 'Numans';
+  font: 14px;
   color: #1B2631;
   margin-bottom: 10px;
 }
 
 #cadastro-systems .acao {
   width: 100px;
+  height: 43px;
   background: #B2BABB;
   color: white;
-  font-weight: bold;
   padding: 12px 0;
   float: left;
   margin-right: 5%;
