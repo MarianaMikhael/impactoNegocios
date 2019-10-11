@@ -51,7 +51,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         {% if user.is_authenticated %}
-                            <p class="navbar-text">Olá, {{ user.first_name }}!<a href="{% url 'logout' %}">logout</a></p>
+                            <p class="navbar-text">Olá, <b>{{ user.first_name }}</b>!<a href="{% url 'logout' %}">logout</a></p>
                         {% endif %}
                     </li>
                 </ul>
@@ -69,12 +69,9 @@
     </div><!---/Content---->
 
     {% block footer %}
-        <footer class="footer">
-            <div class="container">
-                <span class="text-muted">TecBan SA</span>
-            </div>
-        </footer>
+
     {% endblock %}
+
 
 </body>
 </html>

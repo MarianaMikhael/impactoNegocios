@@ -109,22 +109,14 @@
             </fieldset>
         </div><!--/col-->
 
-        <div class="col text-uppercase" id="sair-cadastro" align="right">
+        <div class="col" id="sair-cadastro" align="right">
             <a href="{% url 'index_sistemas' %}" class="btn">Voltar</a>
         </div>     
 
-
     </form>
 
+{% endblock %}
 
-<!--
-   
-        <div class="row">
-            <div class="col" id="btn-salvar-cadastro-19" align="right">
-                <button type="submit" class="btn btn-success text-uppercase">salvar</button>
-            </div>
-        </div>
-
--->
-
+{% block footer %}
+    {% include 'includes/footer.html' %}
 {% endblock %}
