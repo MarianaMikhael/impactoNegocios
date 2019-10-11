@@ -24,15 +24,15 @@
 
 
 {% if form.errors %}
-    <p class=" label label-danger">
+    <p class="label label-danger">
         Your username and password didn't match. 
-        Please try again.
+        Please try again <i class="fa fa-exclamation-triangle"></i>
     </p>
 
     {% for error in form.errors %}
-        <div class="text-danger">
-            {{ error }}
+        <div class="text-danger-login">
+            <p>{{ error }}</p>
         </div>
     {% endfor %}
-    
+        
 {% endif %}
