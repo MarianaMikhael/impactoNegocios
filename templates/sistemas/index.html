@@ -95,11 +95,9 @@
     </section>
 
     <!--Botão de Cadastro-->
-    <div class="row text-uppercase">
-        <div class="col" id="novo-cadastro" align="right">
-            <a href="{% url 'create_cadastro' %}" class="btn" id="btn-novo-cadastro">novo</a>
-        </div>
-    </div>
+    <a href="{% url 'create_cadastro' %}" class="btn-float" id="novo-cadastro">
+        <i class="fa fa-plus"></i>
+    </a>
 
 {% endblock %}
 
