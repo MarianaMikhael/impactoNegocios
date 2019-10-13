@@ -6,8 +6,14 @@ from datetime import datetime
 
 register = template.Library()
 
+
 @register.simple_tag
-def hora_servidor(format_string):
+def footer_message():
+    return "TecBan SA"
+
+
+@register.simple_tag(takes_context=True)
+def hora_servidor(context, format_string):
     return datetime.now().strftime(format_string)
 # {% load custom_tags %}
 # {% hora_servidor "%Y-%m-%d %I:%M %p" as the_time %}

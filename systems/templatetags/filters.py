@@ -6,6 +6,7 @@ from django import template
 
 register = template.Library()
 
+
 @register.filter
 def arredondamento(value, casas):
     return round(value, casas)
