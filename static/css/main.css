@@ -14,7 +14,11 @@ body {
   	background-color:#333;
 }
 
-p, a, span,
+b {
+  font-weight: bold;
+}
+
+a, p, span,
 h1, h2, h3, h4, h5, h6,
 label, input, select, textarea, button {
   font-family: 'Numans', sans-serif;
@@ -22,10 +26,6 @@ label, input, select, textarea, button {
 
 a:hover {
   text-decoration: none;
-  font-weight: bold;
-}
-
-b {
   font-weight: bold;
 }
 
@@ -59,7 +59,7 @@ button:hover,
   line-height: 44px;
   border: 5px solid;
   border-radius: 50%;
-  background: linear-gradient(100deg, #707B7C, #B2BABB, #1B2631); /*Change colors as you want*/
+  background: linear-gradient(100deg, #707B7C, #B2BABB, #1B2631);
   background-size: 1000% 1000% !important;
   -webkit-animation: changeColors 30s ease infinite;
   -moz-animation: changeColors 30s ease infinite;
@@ -84,7 +84,7 @@ button:hover,
 }
 
 #novo-cadastro,
-#retornar {
+#home {
   bottom: 50px;
 }
 
