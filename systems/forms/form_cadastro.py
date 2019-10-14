@@ -83,7 +83,7 @@ class SistemaForm(ModelForm):
             'janelas_Criticas',
             'RTO_hrs',
             'servidores',
-            'topologia',
+            'url_Topologia',
         ]
 
 

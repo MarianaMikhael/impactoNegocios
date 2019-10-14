@@ -69,7 +69,7 @@ class t_Responsavel_Desenvolvimento(models.Model):
 
     # nomeia o objeto conforme o atributo escolhido
     def __str__(self):
-        return self.celula_Dev
+        return '{} ({}). {}'.format(self.celula_Dev, self.fk_Area_Dev, self.nome_Resp_Dev)
 
     class Meta:
         verbose_name = 'Responsável pelo Desenvolvimento'
@@ -89,7 +89,7 @@ class t_Responsavel_Suporte(models.Model):
 
     # nomeia o objeto conforme o atributo escolhido
     def __str__(self):
-        return self.celula_Sup
+        return '{} ({}). {}'.format(self.celula_Sup, self.fk_Area_Sup, self.nome_Resp_Sup)
 
     class Meta:
         verbose_name = 'Responsável pelo Suporte'
@@ -126,7 +126,7 @@ class t_Criticidade(models.Model):
 
     # nomeia o objeto conforme o atributo escolhido
     def __str__(self):
-        return self.criticidade_Suporte
+        return '{} ({})'.format(self.criticidade_Suporte, self.nivel_Criticidade) 
 
     class Meta:
         verbose_name = 'Nível de Criticidade'
@@ -194,9 +194,9 @@ class t_Sistema(models.Model):
     servidores = models.CharField(max_length=128,
                                   blank=True,
                                   verbose_name='Servidores')
-    topologia = models.URLField(max_length=250,
+    url_Topologia = models.URLField(max_length=250,
                                 blank=True,
-                                verbose_name='Topologia')
+                                verbose_name='URL - Topologia')
 
     # nomeia o objeto conforme o atributo escolhido
     def __str__(self):
@@ -227,7 +227,7 @@ class t_Contingencia(models.Model):
     contingencia_Usuario = models.CharField(max_length=1,
                                             choices=conting_choices,
                                             default='',
-                                            verbose_name='Contingenciado pelo Usuário')
+                                            verbose_name='Contingenciado pelo Usuário?')
     RTO_Contingencia = models.DecimalField(max_digits=4, decimal_places=2,
                                            blank=True,
                                            verbose_name='RTO(hrs) Contingência')
@@ -248,7 +248,7 @@ class t_Contingencia_Arquitetura(models.Model):
                                          default='',
                                          verbose_name='Sistema Contingenciado')
     nome_Contingencia = models.CharField(max_length=128,
-                                         verbose_name='Nome da Contingência')
+                                         verbose_name='Nome da Contingência (Arquitetura)')
 
     # nomeia o objeto conforme o atributo escolhido
     def __str__(self):
@@ -266,7 +266,7 @@ class t_Contingencia_Usuario(models.Model):
                                          default='',
                                          verbose_name='Sistema Contingenciado')
     nome_Contingencia = models.CharField(max_length=128,
-                                         verbose_name='Nome da Contingência')
+                                         verbose_name='Nome da Contingência (Usuário)')
 
     # nomeia o objeto conforme o atributo escolhido
     def __str__(self):
