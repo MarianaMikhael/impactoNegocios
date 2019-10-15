@@ -126,7 +126,7 @@ class t_Criticidade(models.Model):
 
     # nomeia o objeto conforme o atributo escolhido
     def __str__(self):
-        return '{} ({})'.format(self.criticidade_Suporte, self.nivel_Criticidade) 
+        return '{} ({})'.format(self.nivel_Criticidade, self.criticidade_Suporte) 
 
     class Meta:
         verbose_name = 'Nível de Criticidade'
@@ -406,7 +406,7 @@ class t_Impacto_Potencial(models.Model):
     cod_Impacto_Potencial = models.AutoField(primary_key=True)
     impacto_Potencial = models.CharField(max_length=255,
                                                    blank=False,
-                                                   verbose_name='Consequência Causada Por Indisponibilidade')
+                                                   verbose_name='Consequência Causada Por Indisponibilidade Sistêmica')
 
     # nomeia o objeto conforme o atributo escolhido
     def __str__(self):
