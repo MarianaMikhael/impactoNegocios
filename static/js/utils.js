@@ -12,7 +12,6 @@ jQuery(function () {
 /*----------------------------------Formulário de Cadastro----------------------------------*/
 $(function(){
     var atual_fs, next_fs, prev_fs;
-    var formulario = $('form[id=cadastro-systems]');
 
     /*--------------------Barra de progress, próximo--------------------*/
     $('.next').click(function(){

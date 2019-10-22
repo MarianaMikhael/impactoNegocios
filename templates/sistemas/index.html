@@ -1,97 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block scripts %}
-
-    <script>
-        $(function() {
-                $('.material-card > .mc-btn-action').click(function () {
-                    var card = $(this).parent('.material-card');
-                    var icon = $(this).children('i');
-                    icon.addClass('fa-spin-fast');
-
-                    if (card.hasClass('mc-active')) {
-                        card.removeClass('mc-active');
-
-                        window.setTimeout(function() {
-                            icon
-                                .removeClass('fa-arrow-left')
-                                .removeClass('fa-spin-fast')
-                                .addClass('fa-bars');
-
-                        }, 800);
-                    } else {
-                        card.addClass('mc-active');
-
-                        window.setTimeout(function() {
-                            icon
-                                .removeClass('fa-bars')
-                                .removeClass('fa-spin-fast')
-                                .addClass('fa-arrow-left');
-
-                        }, 800);
-                    }
-                });
-            });
-    </script>
-
-{% endblock %}
 
 {% block title %}Nível de Criticidade {% endblock %}
 
+
 {% block main %}
 
-    <section class="container-fluid" id="card-system">
+    <section>
 
-            <div class="row active-with-click">
+        {% block card %}
+            {% include './card.html' %}
+        {% endblock %}
 
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <article class="material-card Red">
-                        <h2>
-                            <span>Sistema - Name Here</span>
-                            <strong>
-                                <i class="fa fa-exclamation-triangle"></i>
-                                ACN
-                            </strong>
-                        </h2>
-                        <div class="mc-content">
-                            <div class="img-container">
-                                <img class="img-responsive" src="../../static/images/logo.png">
-                            </div>
-                            <div class="mc-description">
-                                <BR>
-                                [contingência arquitetura]
-                                <BR>
-                                [contingencia usuário]
-                            </div>
-                        </div>
-                        <a class="mc-btn-action">
-                            <i class="fa fa-bars"></i>
-                        </a>
-                        <div class="mc-footer">
-                            <h4>
-                                continuidade_Tecnologica
-                            </h4>
-
-                            <div>
-                                <label>Reestabelecimento em horas (RTO): </label>
-                            </div>
-
-                            <div class="row" align="left">
-                                <div class="col info-card">
-                                    <h6><a href="#">Topologia</a></h6>
-                                </div>
-                                <div class="col info-card" align="right">
-                                    <h6><a href="#">Servidores</a></h6>
-                                </div>
-                            </div>
-
-                        </div>
-                    </article>
-                </div>
-
-            </div><!--/row-->
-  
     </section>
 
     <!--Botão de Cadastro-->

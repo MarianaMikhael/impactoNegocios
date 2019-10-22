@@ -1,0 +1,41 @@
+{% load filters %}
+
+    <div class="row justify-content-start">
+        {% for item in sistema %}
+            <div class="col">
+                <aside class="profile-card">
+
+                    <header>
+                        <div id="criticidade">
+                            <a href="#">{{ item.fk_Criticidade }}</a>
+                        </div>
+
+                        <div id="status-sistema">
+                            <h1><span>{{ item.sistema }}</span></h1>
+                            <h2><span>Status Padrão: {{ item.status }}</h2>
+                        </div>
+                    </header>
+                
+                    <div class="profile-bio">
+                        <p>
+                            Contingenciado pelo Usuário: {{ item.contingencia.contingencia_Usuario }}
+                            <BR>
+                            Reestabelecimento Proposto: {{ item.impacto.limite_Proposto|arredondamento:1 }}
+                            <BR>
+                            <BR>
+                            Contingenciado pela TecBan:
+                            <BR>
+                            RTO: {{ item.RTO|arredondamento:1 }}
+                        </p>
+                    </div>
+                
+                    <ul class="profile-social-links">
+                        <li>
+                            <a href="#">Infraestrutura</a>
+                        </li>
+                    </ul>
+
+                </aside>
+            </div>
+        {% endfor %}
+    </div>
