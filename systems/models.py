@@ -18,58 +18,18 @@ class t_Cadeia_Servico(models.Model):
         verbose_name_plural = 'Cadeia de Serviço'
 
 
-class t_Area_Desenvolvimento(models.Model):
-    cod_Area_Dev = models.AutoField(primary_key=True)
-    area_Dev = models.CharField(max_length=128,
-                                blank=False,
-                                verbose_name='Área')
-    gerente_Area_Dev = models.CharField(max_length=128, blank=True,
-                                        verbose_name='Gerente')
-    coordenador_Area_Dev = models.CharField(max_length=128, blank=True,
-                                            verbose_name='Coordenador')
-
-    # nomeia o objeto conforme o atributo escolhido
-    def __str__(self):
-        return self.area_Dev
-
-    class Meta:
-        verbose_name = 'Área de Desenvolvimento'
-        verbose_name_plural = 'Áreas de Desenvolvimento'
-
-
-class t_Area_Suporte(models.Model):
-    cod_Area_Sup = models.AutoField(primary_key=True)
-    area_Sup = models.CharField(max_length=128,
-                                blank=False,
-                                verbose_name='Área')
-    gerente_Area_Sup = models.CharField(max_length=128, blank=True,
-                                        verbose_name='Gerente')
-    coordenador_Area_Sup = models.CharField(max_length=128, blank=True,
-                                            verbose_name='Coordenador')
-
-    # nomeia o objeto conforme o atributo escolhido
-    def __str__(self):
-        return self.area_Sup
-
-    class Meta:
-        verbose_name = 'Área de Suporte'
-        verbose_name_plural = 'Áreas de Suporte'
-
-
 class t_Responsavel_Desenvolvimento(models.Model):
     cod_Responsavel_Dev = models.AutoField(primary_key=True)
-    fk_Area_Dev = models.ForeignKey(t_Area_Desenvolvimento,
-                                     on_delete=models.PROTECT,
-                                     default='',
-                                     verbose_name='Área')
+    area_Dev = models.CharField(max_length=128, blank=False,
+                                verbose_name='Área de Desenvolvimento')
+    nome_Resp_Area = models.CharField(max_length=128, blank=False,
+                                     verbose_name='Responsável Pela Área')
     celula_Dev = models.CharField(max_length=128, blank=True,
                                   verbose_name='Célula de Desenvolvimento')
-    nome_Resp_Dev = models.CharField(max_length=128, blank=True,
-                                     verbose_name='Desenvolvedor Responsável')
 
     # nomeia o objeto conforme o atributo escolhido
     def __str__(self):
-        return '{} ({}). {}'.format(self.celula_Dev, self.fk_Area_Dev, self.nome_Resp_Dev)
+        return '{}, {}'.format(self.area_Dev, self.celula_Dev)
 
     class Meta:
         verbose_name = 'Responsável pelo Desenvolvimento'
@@ -78,22 +38,117 @@ class t_Responsavel_Desenvolvimento(models.Model):
 
 class t_Responsavel_Suporte(models.Model):
     cod_Responsavel_Sup = models.AutoField(primary_key=True)
-    fk_Area_Sup = models.ForeignKey(t_Area_Suporte,
-                                     on_delete=models.PROTECT,
-                                     default='',
-                                     verbose_name='Área')
+    area_Sup = models.CharField(max_length=128, blank=False,
+                                verbose_name='Área de Suporte')
+    nome_Resp_Area = models.CharField(max_length=128, blank=False,
+                                     verbose_name='Responsável Pela Área')
     celula_Sup = models.CharField(max_length=128, blank=True,
-                                  verbose_name='Célula de Sustentação')
-    nome_Resp_Sup = models.CharField(max_length=128, blank=True,
-                                     verbose_name='Sustentador Responsável')
+                                  verbose_name='Célula de Suporte')
 
     # nomeia o objeto conforme o atributo escolhido
     def __str__(self):
-        return '{} ({}). {}'.format(self.celula_Sup, self.fk_Area_Sup, self.nome_Resp_Sup)
+        return '{}, {}'.format(self.area_Sup, self.celula_Sup)
 
     class Meta:
         verbose_name = 'Responsável pelo Suporte'
         verbose_name_plural = 'Responsáveis pelo Suporte'
+
+
+class t_Sistema(models.Model):
+    cod_Sistema = models.AutoField(primary_key=True)
+    ativo = models.BooleanField(default=True,
+                                verbose_name='Status')
+    sistema = models.CharField(max_length=128,
+                               blank=False,
+                               verbose_name='Aplicação')
+    descricao = models.TextField(blank=True,
+                                 verbose_name='Descrição do Serviço')
+    fk_Cadeia_Servico = models.ForeignKey(t_Cadeia_Servico,
+                                          on_delete=models.PROTECT,
+                                          default='',
+                                          verbose_name='Cadeia de Serviço')
+    fk_Responsavel_Dev = models.ForeignKey(t_Responsavel_Desenvolvimento,
+                                           on_delete=models.PROTECT,
+                                           default='',
+                                           verbose_name='Desenvolvimento')
+    fk_Responsavel_Sup = models.ForeignKey(t_Responsavel_Suporte,
+                                           on_delete=models.PROTECT,
+                                           default='',
+                                           verbose_name='Suporte')  
+
+    # nomeia o objeto conforme o atributo escolhido
+    def __str__(self):
+        return self.sistema
+
+    class Meta:
+        verbose_name = 'Sistema'
+        verbose_name_plural = 'Sistemas'
+
+
+class t_Continuidade_Tecnologica(models.Model):
+    cont_tec = [
+        ('Disponibilidade', (
+            ('', ''),
+            ('Alta Disp. Local', 'Alta Disp. Local'),
+            ('Alta Disp. Entre Sites', 'Alta Disp. Entre Sites'),
+            ('Infraestrutura Segmentada Por Raias', 'Infraestrutura Segmentada Por Raias'),
+            ('N/A', 'N/A'),
+            )
+        ),
+        ('Contingência', (
+            ('', ''),
+            ('Contingência Local Manual', 'Contingência Local Manual'),
+            ('Contingência Local Automática', 'Contingência Local Automática'),
+            ('Contingência Entre Sites Manual', 'Contingência Entre Sites Manual'),
+            ('Contingência Entre Sites Automática', 'Contingência Entre Sites Automática'),
+            ('N/A', 'N/A'),
+            )
+        ),
+    ]
+
+    recup_choices = (
+        ('', ''),
+        ('S', 'Sim'),
+        ('N', 'Não'),
+        ('C', 'À Confirmar'),
+    )
+
+    cod_Continuidade = models.AutoField(primary_key=True)
+    fk_Sistema = models.ForeignKey(t_Sistema,
+                                   on_delete=models.PROTECT,
+                                   default='',
+                                   verbose_name='Aplicação')
+    camada_balanceador = models.CharField(max_length=35,
+                                          choices=cont_tec,
+                                          default='',
+                                          verbose_name='Camada do Balanceador')
+    camada_aplicacao = models.CharField(max_length=35,
+                                        choices=cont_tec,
+                                        default='',
+                                        verbose_name='Camada da Aplicação')
+    camada_banco_dados = models.CharField(max_length=35,
+                                          choices=cont_tec,
+                                          default='',
+                                          verbose_name='Camada do Banco de Dados')
+    plano_De_Recup_Doc = models.CharField(max_length=1,
+                                          choices=recup_choices,
+                                          default='',
+                                          verbose_name='Possui plano de recuperação documentado?')
+    plano_De_Recup_Test = models.CharField(max_length=1,
+                                           choices=recup_choices,
+                                           default='',
+                                           verbose_name='Possui plano de recuperação testado?')
+    url_Ficheiro = models.URLField(max_length=500,
+                                   blank=True,
+                                   verbose_name='URL - Documentação')
+
+    # nomeia o objeto conforme o atributo escolhido
+    def __str__(self):
+        return self.fk_Sistema.sistema
+
+    class Meta:
+        verbose_name = 'Continuidade Tecnológica'
+        verbose_name_plural = 'Continuidade Tecnológica'
 
 
 class t_Criticidade(models.Model):
@@ -104,48 +159,118 @@ class t_Criticidade(models.Model):
         ('ACN+', 'ACN+'),
     )
 
-    crit_sup_choices = (
-        ('', ''),
-        ('Não Aplicável', 'Não Aplicável'),
-        ('Não Crítico', 'Não Crítico'),
-        ('Importante', 'Importante'),
-        ('Crítico', 'Crítico'),
-        ('Missão Crítica', 'Missão Crítica'),
-        ('Infraestrutura', 'Infraestrutura'),
-    )
-
     cod_Criticidade = models.AutoField(primary_key=True)
+    fk_Sistema = models.ForeignKey(t_Sistema,
+                                   on_delete=models.PROTECT,
+                                   default='',
+                                   verbose_name='Aplicação')
     nivel_Criticidade = models.CharField(max_length=4,
                                          choices=nivel_crit_choices,
                                          default='',
                                          verbose_name='Nível de Criticidade')
-    criticidade_Suporte = models.CharField(max_length=14,
-                                           choices=crit_sup_choices,
-                                           default='',
-                                           verbose_name='Criticidade Suporte')
+    RTO = models.DecimalField(max_digits=4, decimal_places=2,
+                              blank=True,
+                              verbose_name='RTO')
 
     # nomeia o objeto conforme o atributo escolhido
     def __str__(self):
-        return '{} ({})'.format(self.nivel_Criticidade, self.criticidade_Suporte) 
+        return self.fk_Sistema.sistema
 
     class Meta:
         verbose_name = 'Nível de Criticidade'
         verbose_name_plural = 'Nível de Criticidade'
 
 
-class t_Sistema_Servico(models.Model):
-    cod_Servico = models.AutoField(primary_key=True)
-    servico = models.CharField(max_length=255,
-                               blank=True,
-                               verbose_name='Descrição')
+class t_Impacto_Direto(models.Model):
+    cod_Imp_Direto = models.AutoField(primary_key=True)
+    impacto_Direto = models.CharField(max_length=255,
+                                 blank=True,
+                                 verbose_name='Serviço Impactado Diretamente')
 
     # nomeia o objeto conforme o atributo escolhido
     def __str__(self):
-        return self.servico
+        return self.impacto_Direto
 
     class Meta:
-        verbose_name = 'Sistema (Serviço)'
-        verbose_name_plural = 'Sistemas (Serviços)'
+        verbose_name = 'Impacto Direto'
+        verbose_name_plural = 'Impactos Diretos'
+
+
+class t_Impacto_Indireto(models.Model):
+    cod_Imp_Indireto = models.AutoField(primary_key=True)
+    impacto_Indireto = models.CharField(max_length=255,
+                                   blank=True,
+                                   verbose_name='Serviço Impactado Indiretamente')
+
+    # nomeia o objeto conforme o atributo escolhido
+    def __str__(self):
+        return self.impacto_Indireto
+
+    class Meta:
+        verbose_name = 'Impacto Indireto'
+        verbose_name_plural = 'Impactos Indiretos'
+
+
+class t_Infraestrutura(models.Model):
+    cod_Infraestrutura =  models.AutoField(primary_key=True)
+    fk_Sistema = models.ForeignKey(t_Sistema,
+                                   on_delete=models.PROTECT,
+                                   default='',
+                                   verbose_name='Aplicação')
+    camada_balanceador = models.CharField(max_length=255,
+                                          blank=False,
+                                          verbose_name='Estrutura da Camada do Balanceador')
+    camada_aplicacao = models.CharField(max_length=255,
+                                        blank=False,
+                                        verbose_name='Estrutura da Camada da Aplicação')
+    camada_banco_dados = models.CharField(max_length=255,
+                                          blank=False,
+                                          verbose_name='Estrutura da Camada do Banco de Dados')
+    impacto_Direto = models.ManyToManyField(t_Impacto_Direto, blank=True,
+                                            verbose_name="Impacto Direto")
+    impacto_Indireto = models.ManyToManyField(t_Impacto_Indireto, blank=True,
+                                              verbose_name="Impacto Indireto")
+    # topologia = models.ImageField(upload_to='')
+
+    # nomeia o objeto conforme o atributo escolhido
+    def __str__(self):
+        return self.fk_Sistema.sistema
+
+    class Meta:
+        verbose_name = 'Infraestrutura Sistêmica'
+        verbose_name_plural = 'Infraestrutura Sistêmica'
+
+
+class t_Usuario_Chave(models.Model):
+    cod_Usuario_Chave = models.AutoField(primary_key=True)
+    area_Usuario = models.CharField(max_length=128, blank=False,
+                                    verbose_name='Área do Usuário')
+    usuario_Chave = models.CharField(max_length=128,
+                                     blank=False,
+                                     verbose_name='Usuário Chave')
+
+    # nomeia o objeto conforme o atributo escolhido
+    def __str__(self):
+        return '{} - {}'.format(self.area_Usuario, self.usuario_Chave)
+
+    class Meta:
+        verbose_name = 'Usuário Chave'
+        verbose_name_plural = 'Usuários Chave'
+
+
+class t_Impacto_Potencial(models.Model):
+    cod_Impacto_Potencial = models.AutoField(primary_key=True)
+    impacto_Potencial = models.CharField(max_length=255,
+                                         blank=False,
+                                         verbose_name='Consequência Causada Por Indisponibilidade Sistêmica')
+
+    # nomeia o objeto conforme o atributo escolhido
+    def __str__(self):
+        return self.impacto_Potencial
+
+    class Meta:
+        verbose_name = 'Impacto Potencial'
+        verbose_name_plural = 'Impactos Potenciais'
 
 
 class t_Sistema_Janelas(models.Model):
@@ -159,265 +284,11 @@ class t_Sistema_Janelas(models.Model):
         return self.janela_Critica
 
     class Meta:
-        verbose_name = 'Sistema (Janela Crítica)'
-        verbose_name_plural = 'Sistemas (Janelas Críticas)'
+        verbose_name = 'Janela Crítica'
+        verbose_name_plural = 'Janelas Críticas'
+        
 
-
-class t_Sistema(models.Model):
-    cod_Sistema = models.AutoField(primary_key=True)
-    fk_Cadeia_Servico = models.ForeignKey(t_Cadeia_Servico,
-                                           on_delete=models.PROTECT,
-                                           default='',
-                                           verbose_name='Cadeia de Serviço')
-    fk_Responsavel_Dev = models.ForeignKey(t_Responsavel_Desenvolvimento,
-                                            on_delete=models.PROTECT,
-                                            default='',
-                                            verbose_name='Célula de Desenvolvimento')
-    fk_Responsavel_Sup = models.ForeignKey(t_Responsavel_Suporte,
-                                            on_delete=models.PROTECT,
-                                            default='',
-                                            verbose_name='Célula de Sustentação')
-    fk_Criticidade = models.ForeignKey(t_Criticidade,
-                                        on_delete=models.PROTECT,
-                                        default='',
-                                        verbose_name='Criticidade')
-    sistema = models.CharField(max_length=128,
-                               blank=False,
-                               verbose_name='Sistema')
-    servicos = models.ManyToManyField(t_Sistema_Servico, blank=False,
-                                      verbose_name="Serviço")
-    janelas_Criticas = models.ManyToManyField(t_Sistema_Janelas, blank=False,
-                                              verbose_name="Janelas Críticas")
-    RTO_hrs = models.DecimalField(max_digits=4, decimal_places=2,
-                                  blank=True,
-                                  verbose_name='RTO(hrs)')
-    servidores = models.CharField(max_length=128,
-                                  blank=True,
-                                  verbose_name='Servidores')
-    url_Topologia = models.URLField(max_length=250,
-                                blank=True,
-                                verbose_name='URL - Topologia')
-
-    # nomeia o objeto conforme o atributo escolhido
-    def __str__(self):
-        return self.sistema
-
-    class Meta:
-        verbose_name = 'Sistema'
-        verbose_name_plural = 'Sistemas'
-
-
-class t_Contingencia(models.Model):
-    conting_choices = (
-        ('', ''),
-        ('S', 'Sim'),
-        ('N', 'Não'),
-        ('C', 'À Confirmar')
-    )
-
-    cod_Contingencia = models.AutoField(primary_key=True)
-    fk_Sistema = models.ForeignKey(t_Sistema,
-                                    on_delete=models.PROTECT,
-                                    default='',
-                                    verbose_name='Sistema')
-    contingencia_Arquitetura = models.CharField(max_length=1,
-                                                choices=conting_choices,
-                                                default='',
-                                                verbose_name='Contingenciado pela Arquitetura TecBan?')
-    contingencia_Usuario = models.CharField(max_length=1,
-                                            choices=conting_choices,
-                                            default='',
-                                            verbose_name='Contingenciado pelo Usuário?')
-    RTO_Contingencia = models.DecimalField(max_digits=4, decimal_places=2,
-                                           blank=True,
-                                           verbose_name='RTO(hrs) Contingência')
-
-    # nomeia o objeto conforme o atributo escolhido
-    def __str__(self):
-        return self.cod_Sistema
-
-    class Meta:
-        verbose_name = 'Contingência'
-        verbose_name_plural = 'Contingências'
-
-
-class t_Contingencia_Arquitetura(models.Model):
-    cod_Nome = models.AutoField(primary_key=True)
-    fk_Contingencia = models.ForeignKey(t_Contingencia,
-                                         on_delete=models.PROTECT,
-                                         default='',
-                                         verbose_name='Sistema Contingenciado')
-    nome_Contingencia = models.CharField(max_length=128,
-                                         verbose_name='Nome da Contingência (Arquitetura)')
-
-    # nomeia o objeto conforme o atributo escolhido
-    def __str__(self):
-        return self.nome_Contingencia
-
-    class Meta:
-        verbose_name = 'Contingência (Arquitetura TecBan)'
-        verbose_name_plural = 'Contingências (Arquitetura TecBan)'
-
-
-class t_Contingencia_Usuario(models.Model):
-    cod_Nome = models.AutoField(primary_key=True)
-    fk_Contingencia = models.ForeignKey(t_Contingencia,
-                                         on_delete=models.PROTECT,
-                                         default='',
-                                         verbose_name='Sistema Contingenciado')
-    nome_Contingencia = models.CharField(max_length=128,
-                                         verbose_name='Nome da Contingência (Usuário)')
-
-    # nomeia o objeto conforme o atributo escolhido
-    def __str__(self):
-        return self.nome_Contingencia
-
-    class Meta:
-        verbose_name = 'Contingência (Usuário)'
-        verbose_name_plural = 'Contingências (Usuário)'
-
-
-class t_Continuidade_Tecnologica(models.Model):
-    cont_tec_choices = (
-        ('', ''),
-        ('DR', 'Disaster Recovery'),
-        ('AD', 'Alta Disponibilidade'),
-    )
-
-    recup_choices = (
-        ('', ''),
-        ('S', 'Sim'),
-        ('N', 'Não'),
-        ('C', 'À Confirmar'),
-    )
-
-    cod_Continuidade = models.AutoField(primary_key=True)
-    fk_Sistema = models.ForeignKey(t_Sistema,
-                                    on_delete=models.PROTECT,
-                                    default='',
-                                    verbose_name='Sistema')
-
-    continuidade_Tecnologica = models.CharField(max_length=2,
-                                                choices=cont_tec_choices,
-                                                default='',
-                                                verbose_name='Continuidade Tecnológica')
-    plano_De_Recup_Doc = models.CharField(max_length=1,
-                                          choices=recup_choices,
-                                          default='',
-                                          verbose_name='Possui plano de recuperação documentado?')
-    plano_De_Recup_Test = models.CharField(max_length=1,
-                                           choices=recup_choices,
-                                           default='',
-                                           verbose_name='Possui plano de recuperação testado?')
-    url_Ficheiro = models.URLField(max_length=250,
-                                   blank=True,
-                                   verbose_name='URL - Documentação')
-
-    # nomeia o objeto conforme o atributo escolhido
-    def __str__(self):
-        return self.continuidade_Tecnologica
-
-    class Meta:
-        verbose_name = 'Continuidade Tecnológica'
-        verbose_name_plural = 'Continuidade Tecnológica'
-
-
-class t_Continuidade_Tecnologica_Sites(models.Model):
-    site_choices = (
-        ('', ''),
-        ('V', 'Vivo'),
-        ('D', 'Diveo'),
-        ('C', 'Cetem'),
-    )
-
-    cod_Continuidade_Tecnologica = models.AutoField(primary_key=True)
-    fk_Continuidade = models.ForeignKey(t_Continuidade_Tecnologica,
-                                         on_delete=models.PROTECT,
-                                         default='',
-                                         verbose_name='Continuidade Tecnológica')
-    camada = models.IntegerField(choices=list(zip(range(1, 16), range(1, 16))),
-                                 verbose_name='Camada de Serviço')
-    # models.IntegerField(choices=list(zip(range(1, 10), range(1, 10))))
-    servico = models.CharField(max_length=128,
-                               blank=False,
-                               verbose_name='Serviço')
-    site = models.CharField(max_length=1,
-                            choices=site_choices,
-                            default='',
-                            verbose_name='Site (DataCenter)')
-    observacao = models.TextField(blank=True,
-                                  verbose_name='Observações')
-
-    # nomeia o objeto conforme o atributo escolhido
-    def __str__(self):
-        return self.site
-
-    class Meta:
-        verbose_name = 'Continuidade Tecnológica (Site)'
-        verbose_name_plural = 'Continuidade Tecnológica (Sites)'
-
-
-class t_Impacto_Fronteira(models.Model):
-    cod_Fronteira = models.AutoField(primary_key=True)
-    fronteira = models.CharField(max_length=128,
-                                 blank=True,
-                                 verbose_name='Nome da Aplicação Que Faz Fronteira')
-
-    # nomeia o objeto conforme o atributo escolhido
-    def __str__(self):
-        return self.fronteira
-
-    class Meta:
-        verbose_name = 'Impacto (Fronteira)'
-        verbose_name_plural = 'Impactos (Fronteiras)'
-
-
-class t_Impacto_Dependencia(models.Model):
-    cod_Dependencia = models.AutoField(primary_key=True)
-    dependencia = models.CharField(max_length=128,
-                                   blank=True,
-                                   verbose_name='Nome da Aplicação Dependente')
-
-    # nomeia o objeto conforme o atributo escolhido
-    def __str__(self):
-        return self.dependencia
-
-    class Meta:
-        verbose_name = 'Impacto (Dependência)'
-        verbose_name_plural = 'Impactos (Dependências)'
-
-
-class t_Impacto_Usuario(models.Model):
-    cod_Usuario_Chave = models.AutoField(primary_key=True)
-    usuario_Chave = models.CharField(max_length=128,
-                                     blank=False,
-                                     verbose_name='Usuário Chave')
-
-    # nomeia o objeto conforme o atributo escolhido
-    def __str__(self):
-        return self.usuario_Chave
-
-    class Meta:
-        verbose_name = 'Impacto (Usuário Chave)'
-        verbose_name_plural = 'Impactos (Usuários Chave)'
-
-
-class t_Impacto_Potencial(models.Model):
-    cod_Impacto_Potencial = models.AutoField(primary_key=True)
-    impacto_Potencial = models.CharField(max_length=255,
-                                                   blank=False,
-                                                   verbose_name='Consequência Causada Por Indisponibilidade Sistêmica')
-
-    # nomeia o objeto conforme o atributo escolhido
-    def __str__(self):
-        return self.impacto_Potencial
-
-    class Meta:
-        verbose_name = 'Impacto Potencial'
-        verbose_name_plural = 'Impactos Potenciais'
-
-
-class t_Impacto(models.Model):
+class t_Impacto_Negocio(models.Model):
     impacto_choices = (
         ('', ''),
         ('D', 'Direto'),
@@ -432,11 +303,25 @@ class t_Impacto(models.Model):
         ('Ambos', 'Ambos'),
     )
 
+    crit_sup_choices = (
+        ('', ''),
+        ('Não Aplicável', 'Não Aplicável'),
+        ('Não Crítico', 'Não Crítico'),
+        ('Importante', 'Importante'),
+        ('Crítico', 'Crítico'),
+        ('Missão Crítica', 'Missão Crítica'),
+        ('Infraestrutura', 'Infraestrutura'),
+    )
+
     cod_Impacto = models.AutoField(primary_key=True)
+    fk_Usuario = models.ForeignKey(t_Usuario_Chave,
+                                   on_delete=models.PROTECT,
+                                   default='',
+                                   verbose_name='Usuário Chave')
     fk_Sistema = models.ForeignKey(t_Sistema,
-                                    on_delete=models.PROTECT,
-                                    default='',
-                                    verbose_name='Sistema')
+                                   on_delete=models.PROTECT,
+                                   default='',
+                                   verbose_name='Aplicação')
     cliente = models.CharField(max_length=5,
                                choices=cliente_choices,
                                default='',
@@ -460,11 +345,11 @@ class t_Impacto(models.Model):
     afeta_Imagem_IF = models.CharField(max_length=3,
                                        choices=impacto_choices,
                                        default='',
-                                       verbose_name='Afeta a imagem da Tecban com as IFs?')
+                                       verbose_name='Afeta a imagem da TecBan com as IFs?')
     afeta_Imagem_Consumidor = models.CharField(max_length=3,
                                                choices=impacto_choices,
                                                default='',
-                                               verbose_name='Afeta a imagem da TecBan com o consumidor final?')
+                                               verbose_name='Afeta a imagem da TecBan com o Consumidor Final?')
     impacto_Operacional = models.CharField(max_length=3,
                                            choices=impacto_choices,
                                            default='',
@@ -476,26 +361,75 @@ class t_Impacto(models.Model):
     impacto_Contratual = models.CharField(max_length=3,
                                           choices=impacto_choices,
                                           default='',
-                                          verbose_name='gera impacto contratual?')
+                                          verbose_name='Gera impacto contratual?')
     impacto_Legal = models.CharField(max_length=3,
                                      choices=impacto_choices,
                                      default='',
                                      verbose_name='Gera impacto legal?')
-    fronteiras = models.ManyToManyField(t_Impacto_Fronteira, blank=False,
-                                        verbose_name="Fronteiras")
-    dependencias = models.ManyToManyField(t_Impacto_Dependencia, blank=False,
-                                          verbose_name="Dependências")
-    usuario_Chave = models.ManyToManyField(t_Impacto_Usuario, blank=False,
-                                           verbose_name="Usuários Chave")
     impactos_Potenciais = models.ManyToManyField(t_Impacto_Potencial, blank=False,
                                                  verbose_name="Impactos Potenciais")
+    janelas_Criticas = models.ManyToManyField(t_Sistema_Janelas, blank=False,
+                                              verbose_name="Janelas Críticas")
+    RTO_Usuario = models.DecimalField(max_digits=4, decimal_places=2,
+                                       blank=False,
+                                       verbose_name='Limite de Reestabelecimento Proposto')
+    criticidade = models.CharField(max_length=14,
+                                   choices=crit_sup_choices,
+                                   default='',
+                                   verbose_name='Criticidade da Aplicação')
     observacoes = models.TextField(blank=True,
                                    verbose_name='Observações')
 
     # nomeia o objeto conforme o atributo escolhido
     def __str__(self):
-        return self.cliente
+        return '{} - {}'.format(self.fk_Sistema.sistema, self.fk_Usuario.usuario_Chave)
 
     class Meta:
-        verbose_name = 'Impacto'
-        verbose_name_plural = 'Impactos'
+        verbose_name = 'Impacto de Negócio'
+        verbose_name_plural = 'Impactos de Negócio'
+    
+
+class t_Contingencia_Usuario(models.Model):
+    cod_Nome = models.AutoField(primary_key=True)
+    nome_Contingencia = models.CharField(max_length=128,
+                                         verbose_name='Nome da Contingência')
+
+    # nomeia o objeto conforme o atributo escolhido
+    def __str__(self):
+        return self.nome_Contingencia
+
+    class Meta:
+        verbose_name = 'Contingência do Usuário'
+        verbose_name_plural = 'Contingências do Usuário'
+
+
+class t_Contingencia(models.Model):
+    conting_choices = (
+        ('', ''),
+        ('Sim', 'Sim'),
+        ('Não', 'Não'),
+        ('À Confirmar', 'À Confirmar')
+    )
+
+    cod_Contingencia = models.AutoField(primary_key=True)
+    fk_Impacto = models.ForeignKey(t_Impacto_Negocio,
+                                   on_delete=models.PROTECT,
+                                   default='',
+                                   verbose_name='Contingência para:')
+    contingencia_Usuario = models.CharField(max_length=11,
+                                            choices=conting_choices,
+                                            default='',
+                                            verbose_name='Aplicação Contingenciada pelo Usuário?')
+    nome_Cont_User = models.ManyToManyField(t_Contingencia_Usuario, blank=True,
+                                              verbose_name="Tipo de Contigência")                                           
+    RTO_Contingencia = models.DecimalField(max_digits=4, decimal_places=2,
+                                           null = True, blank=True,
+                                           verbose_name='RTO Contingência')
+
+    # nomeia o objeto conforme o atributo escolhido
+    def __str__(self):
+        return str(self.fk_Impacto)
+
+    class Meta:
+        verbose_name = 'Contingência'
+        verbose_name_plural = 'Contingências'

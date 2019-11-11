@@ -19,10 +19,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from account import urls as urls_account
+from home import urls as urls_home
 from systems import urls as urls_systems
 
 urlpatterns = [
     path('', include(urls_account)),
+    path('home/', include(urls_home)),
     path('sistemas/', include(urls_systems)),
     path('admin/', admin.site.urls, name='url_admin')
 ]

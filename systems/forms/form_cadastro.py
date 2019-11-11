@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+from django import forms
 
 import systems.models as m
 
@@ -7,27 +8,7 @@ class CadeiaServicoForm(ModelForm):
     class Meta:
         model = m.t_Cadeia_Servico
         fields = [
-            # 'cadeia_Servico',
-        ]
-
-
-class AreaDesenvolvimentoForm(ModelForm):
-    class Meta:
-        model = m.t_Area_Desenvolvimento
-        fields = [
-            # 'area_Dev',
-            # 'gerente_Area_Dev',
-            # 'coordenador_Area_Dev',
-        ]
-
-
-class AreaSuporteForm(ModelForm):
-    class Meta:
-        model = m.t_Area_Suporte
-        fields = [
-            # 'area_Sup',
-            # 'gerente_Area_Sup',
-            # 'coordenador_Area_Sup',
+            'cadeia_Servico',
         ]
 
 
@@ -35,8 +16,9 @@ class ResponsavelDesenvolvimentoForm(ModelForm):
     class Meta:
         model = m.t_Responsavel_Desenvolvimento
         fields = [
+            'area_Dev',
+            'nome_Resp_Area',
             'celula_Dev',
-            'nome_Resp_Dev',
         ]
 
 
@@ -44,33 +26,9 @@ class ResponsavelSuporteForm(ModelForm):
     class Meta:
         model = m.t_Responsavel_Suporte
         fields = [
+            'area_Sup',
+            'nome_Resp_Area',
             'celula_Sup',
-            'nome_Resp_Sup',
-        ]
-
-
-class CriticidadeForm(ModelForm):
-    class Meta:
-        model = m.t_Criticidade
-        fields = [
-            # 'nivel_Criticidade',
-            # 'criticidade_Suporte',
-        ]
-
-
-class SistemaServicoForm(ModelForm):
-    class Meta:
-        model = m.t_Sistema_Servico
-        fields = [
-            # 'servico',
-        ]
-
-
-class SistemaJanelasForm(ModelForm):
-    class Meta:
-        model = m.t_Sistema_Janelas
-        fields = [
-            # 'janela_Critica',
         ]
 
 
@@ -78,38 +36,12 @@ class SistemaForm(ModelForm):
     class Meta:
         model = m.t_Sistema
         fields = [
+            'ativo',
             'sistema',
-            'servicos',
-            'janelas_Criticas',
-            'RTO_hrs',
-            'servidores',
-            'url_Topologia',
-        ]
-
-
-class ContingenciaForm(ModelForm):
-    class Meta:
-        model = m.t_Contingencia
-        fields = [
-            'contingencia_Arquitetura',
-            'contingencia_Usuario',
-            'RTO_Contingencia',
-        ]
-
-
-class ContingenciaArquiteturaForm(ModelForm):
-    class Meta:
-        model = m.t_Contingencia_Arquitetura
-        fields = [
-            'nome_Contingencia',
-        ]
-
-
-class ContingenciaUsuarioForm(ModelForm):
-    class Meta:
-        model = m.t_Contingencia_Usuario
-        fields = [
-            'nome_Contingencia'
+            'descricao',
+            'fk_Cadeia_Servico',
+            'fk_Responsavel_Dev',
+            'fk_Responsavel_Sup',
         ]
 
 
@@ -117,45 +49,62 @@ class ContinuidadeTecnologicaForm(ModelForm):
     class Meta:
         model = m.t_Continuidade_Tecnologica
         fields = [
-            'continuidade_Tecnologica',
+            'fk_Sistema',
+            'camada_balanceador',
+            'camada_aplicacao',
+            'camada_banco_dados',
             'plano_De_Recup_Doc',
             'plano_De_Recup_Test',
             'url_Ficheiro',
         ]
 
 
-class ContinuidadeTecnologicaSitesForm(ModelForm):
+class CriticidadeForm(ModelForm):
     class Meta:
-        model = m.t_Continuidade_Tecnologica_Sites
+        model = m.t_Criticidade
         fields = [
-            'camada',
-            'servico',
-            'site',
-            'observacao',
+            'fk_Sistema',
+            'nivel_Criticidade',
+            'RTO',
         ]
 
 
-class ImpactoFronteiraForm(ModelForm):
+class ImpactoDiretoForm(ModelForm):
     class Meta:
-        model = m.t_Impacto_Fronteira
+        model = m.t_Impacto_Direto
         fields = [
-            # 'fronteira',
+            'impacto_Direto',
         ]
 
 
-class ImpactoDependenciaForm(ModelForm):
+class ImpactoIndiretoForm(ModelForm):
     class Meta:
-        model = m.t_Impacto_Dependencia
+        model = m.t_Impacto_Indireto
         fields = [
-            # 'dependencia',
+            'impacto_Indireto',
         ]
 
 
-class ImpactoUsuarioForm(ModelForm):
+class InfraestruturaForm(ModelForm):
     class Meta:
-        model = m.t_Impacto_Usuario
+        model = m.t_Infraestrutura
         fields = [
-            # 'usuario_Chave',
+            'fk_Sistema',
+            'camada_balanceador',
+            'camada_aplicacao',
+            'camada_banco_dados',
+            'impacto_Direto',
+            'impacto_Indireto',
+            # 'topologia',
+        ]
+
+
+class UsuarioChaveForm(ModelForm):
+    class Meta:
+        model = m.t_Usuario_Chave
+        fields = [
+            'area_Usuario',
+            'usuario_Chave',
         ]
 
 
@@ -163,14 +112,24 @@ class ImpactoPotencialForm(ModelForm):
     class Meta:
         model = m.t_Impacto_Potencial
         fields = [
-            # 'impacto_Potencial',
+            'impacto_Potencial',
         ]
 
 
-class ImpactoForm(ModelForm):
+class SistemaJanelasForm(ModelForm):
     class Meta:
-        model = m.t_Impacto
+        model = m.t_Sistema_Janelas
         fields = [
+            'janela_Critica',
+        ]
+
+
+class ImpactoNegocioForm(ModelForm):
+    class Meta:
+        model = m.t_Impacto_Negocio
+        fields = [
+            'fk_Usuario',
+            'fk_Sistema',
             'cliente',
             'perda_Receita',
             'despesas_Adicionais',
@@ -182,9 +141,28 @@ class ImpactoForm(ModelForm):
             'impacto_Adm',
             'impacto_Contratual',
             'impacto_Legal',
-            'fronteiras',
-            'dependencias',
-            'usuario_Chave',
             'impactos_Potenciais',
+            'janelas_Criticas',
+            'RTO_Usuario',
+            'criticidade',
             'observacoes',
+        ]
+
+
+class ContingenciaUsuarioForm(ModelForm):
+    class Meta:
+        model = m.t_Contingencia_Usuario
+        fields = [
+            'nome_Contingencia'
+        ]
+
+
+class ContingenciaForm(ModelForm):
+    class Meta:
+        model = m.t_Contingencia
+        fields = [
+            'fk_Impacto',
+            'contingencia_Usuario',
+            'nome_Cont_User',
+            'RTO_Contingencia',
         ]

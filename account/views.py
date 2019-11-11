@@ -16,7 +16,7 @@ def login_request(request):
         user = authenticate(request, username=username, password=password)
         if user:
             login(request, user)
-            return redirect('index_sistemas')
+            return redirect('home')
     context['form'] = form
     return render(request, 'account/login.html', context)
 
