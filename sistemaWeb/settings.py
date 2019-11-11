@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrapform',
     'account',
+    'home',
     'systems',
 ]
 
@@ -139,4 +140,4 @@ MEDIA_URL = '/media/'
 # diretório onde os arquivos serão salvos -> media
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
 
-LOGIN_REDIRECT_URL = 'index_sistemas'
+LOGIN_REDIRECT_URL = 'home'
