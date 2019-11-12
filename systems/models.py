@@ -117,7 +117,8 @@ class t_Continuidade_Tecnologica(models.Model):
     fk_Sistema = models.ForeignKey(t_Sistema,
                                    on_delete=models.PROTECT,
                                    default='',
-                                   verbose_name='Aplicação')
+                                   verbose_name='Aplicação',
+                                   related_name='continuidade')
     camada_balanceador = models.CharField(max_length=35,
                                           choices=cont_tec,
                                           default='',
@@ -163,7 +164,8 @@ class t_Criticidade(models.Model):
     fk_Sistema = models.ForeignKey(t_Sistema,
                                    on_delete=models.PROTECT,
                                    default='',
-                                   verbose_name='Aplicação')
+                                   verbose_name='Aplicação',
+                                   related_name='criticidade')
     nivel_Criticidade = models.CharField(max_length=4,
                                          choices=nivel_crit_choices,
                                          default='',
@@ -216,7 +218,8 @@ class t_Infraestrutura(models.Model):
     fk_Sistema = models.ForeignKey(t_Sistema,
                                    on_delete=models.PROTECT,
                                    default='',
-                                   verbose_name='Aplicação')
+                                   verbose_name='Aplicação',
+                                   related_name='infraestrutura')
     camada_balanceador = models.CharField(max_length=255,
                                           blank=False,
                                           verbose_name='Estrutura da Camada do Balanceador')
@@ -321,7 +324,8 @@ class t_Impacto_Negocio(models.Model):
     fk_Sistema = models.ForeignKey(t_Sistema,
                                    on_delete=models.PROTECT,
                                    default='',
-                                   verbose_name='Aplicação')
+                                   verbose_name='Aplicação',
+                                   related_name='impactos_negocio')
     cliente = models.CharField(max_length=5,
                                choices=cliente_choices,
                                default='',
@@ -412,8 +416,14 @@ class t_Contingencia(models.Model):
     )
 
     cod_Contingencia = models.AutoField(primary_key=True)
+    fk_Sistema = models.ForeignKey(t_Sistema,
+                                   on_delete=models.PROTECT,
+                                   default='',
+                                   verbose_name='Aplicação',
+                                   related_name='contingencia')
     fk_Impacto = models.ForeignKey(t_Impacto_Negocio,
                                    on_delete=models.PROTECT,
+                                   null = True,
                                    default='',
                                    verbose_name='Contingência para:')
     contingencia_Usuario = models.CharField(max_length=11,
@@ -421,7 +431,7 @@ class t_Contingencia(models.Model):
                                             default='',
                                             verbose_name='Aplicação Contingenciada pelo Usuário?')
     nome_Cont_User = models.ManyToManyField(t_Contingencia_Usuario, blank=True,
-                                              verbose_name="Tipo de Contigência")                                           
+                                            verbose_name="Tipo de Contigência")                                           
     RTO_Contingencia = models.DecimalField(max_digits=4, decimal_places=2,
                                            null = True, blank=True,
                                            verbose_name='RTO Contingência')
