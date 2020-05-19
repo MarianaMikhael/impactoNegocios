@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+
+    <div class="background-home">
+
+        <div class="cabecalho" id="gestao-crise">
+            <h4 id="titulo">Gestão de Crise</h4>
+            <h6>
+                Experiência do Usuário e Impactos de Negócio
+                <BR>
+                Mediante a Indisponibilidades Sistêmicas
+            </h6> 
+        </div><!--/cabecalho-->
+
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2">
+                    <a href="{% url 'index_ac' %}" class="filtro" id="ac">
+                        <span>AC</span>
+                    </a>
+                </div>
+
+                <div class="col col-lg-2">
+                    <a href="{% url 'index_acn' %}" class="filtro" id="acn">
+                        <span>ACN</span>
+                    </a>
+                </div>
+
+                <div class="ccol col-lg-2">
+                    <a href="{% url 'index_acn_plus' %}" class="filtro" id="acn-plus">
+                        <span>ACN+</span>
+                    </a>
+                </div>
+            </div><!--/row-->
+        </div><!--/container-->
+
+    </div><!--/background-home-->
+
+{% endblock %}

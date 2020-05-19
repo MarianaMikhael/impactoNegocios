@@ -62,18 +62,16 @@
     </nav><!--/Navbar-->
 
     <!--Content-->
-    <div class="container-fluid" id="content-page">
+    {% block main %}
 
-        {% block main %}
-
-        {% endblock %}
-
-    </div><!---/Content---->
-
+    {% endblock %}
+    <!--/Content-->
+ 
+    <!--Footer-->
     {% block footer %}
 
     {% endblock %}
-
+    <!--/Footer-->
 
 </body>
 </html>

@@ -2,16 +2,16 @@
 
 html {
   height: 100%;
+  width: 100%;
 }
 
 body {
-    background: url('../images/background.png') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-	  color:#fff;
-  	background-color:#333;
+  background: url('../images/background.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color:#fff;
 }
 
 b {
@@ -20,8 +20,9 @@ b {
 
 a, p, span,
 h1, h2, h3, h4, h5, h6,
-label, input, select, textarea, button {
+label, input, select, option, textarea, button {
   font-family: 'Numans', sans-serif;
+  color: #1B2631;
 }
 
 a:hover {
@@ -31,19 +32,35 @@ a:hover {
 
 button,
 .btn {
-  width: 100px;
-  height: 43px;
   background: #3366FF;
   color: white;
+  width: 100px;
+  height: 43px;
   padding: 10px 10px;
   margin-block-end: 10px;
+  border: 1px solid;
   border-radius: 5px;
+  outline: none;
 }
 
 button:hover,
 .btn:hover {
   background: #0000FF;
   color: white;
+  cursor: pointer;
+}
+
+/*--------------------------------------Background-Home------------------------------------*/
+.background-home {
+  background: url('../../static/images/ATM2.PNG') no-repeat center center fixed;
+  height: 100vh;
+  padding-block-start: 69px;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+  background-position: bottom;
+  background-color: white;
 }
 
 /*--------------------------------------Botão Flutuante------------------------------------*/
@@ -79,13 +96,29 @@ button:hover,
   }
 }
 
+@keyframes changeColors {
+  0% {
+      background-position: 0 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0 50%;
+  }
+}
+
 #seta-topo {
   bottom: 10px;
 }
 
-#novo-cadastro,
-#home {
+#home,
+#return {
   bottom: 50px;
+}
+
+#novo-cadastro {
+  bottom: 90px;
 }
 
 /*------------------------------------------Navbar------------------------------------------*/
@@ -117,38 +150,29 @@ nav#navbar-default a {
   background: none;
 }
 
+/*-----------------------------------------SideBar------------------------------------------*/
+
+
 /*------------------------------------Container Page-Into-----------------------------------*/
 #content-page {
-  padding-block-start: 70px;
+  padding-block-start: 69px;
 }
 
 /*------------------------------------------Footer------------------------------------------*/
 .footer {
-  padding-block-end: 1%;
+  color: #707B7C;
+  position: static;
+  padding: 10% 0 1% 0;
   text-align: center;
   font-size: 10px;
-}
-
-/*-------------------------------------Login Card ERROR-------------------------------------*/
-.label-danger {
-  background-color:  rgba(255, 255, 0, 0.5);
-  text-align: center;
-  color: rgba(27, 38, 49, 0.7);
-}
-.text-danger-login {
-  color: red;
-  font-size: 10px;
-  text-align: center;
 }
 
 /*----------------------------------------Login Card----------------------------------------*/
 .card{
-  height: 370px;
-  margin-top: 100px;
+  margin-top: 150px;
   height: auto;
   background-color:white !important;
 }
-
 
 .card-header {
   background-color:white !important;
@@ -165,12 +189,10 @@ color: white;
 border: 0 !important;
 }
 
-
 input:focus{
   outline: 0 0 0 0  !important;
   box-shadow: 0 0 0 0 !important;
 }
-
 
 .login_btn{
   color: white;
@@ -183,25 +205,80 @@ input:focus{
   background-color: #707B7C;
 }
 
-/*----------------------------------------Formulário de Cadastro de Sistemas----------------------------------------*/
-#cadastro-systems {
+/*-------------------------------------Login Card ERROR-------------------------------------*/
+.label-danger {
+  background-color:  rgba(255, 255, 0, 0.5);
+  text-align: center;
+  color: rgba(27, 38, 49, 0.7);
+}
+.text-danger-login {
+  color: #FF0000;
+  font-size: 10px;
+  text-align: center;
+}
+
+/*---------------------------------Título, Gestão de Crise----------------------------------*/
+.cabecalho #titulo {
+  margin-top: 30px;
+}
+/*----------------------------------Filtro por Criticidade----------------------------------*/
+.cabecalho {
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  padding: 5% 1% 1%;
+}
+
+.filtro {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 20%;
+  margin: 5% auto;
+  line-height: 90px;
+  text-align: center;
+  color: #fff !important;
+  background-size: 1000% 1000% !important;
+  background: linear-gradient(100deg, #FF0000, #B2BABB, rgba(27, 38, 49, 0.7));
+  -webkit-animation: changeColors 30s ease infinite;
+  -moz-animation: changeColors 30s ease infinite;
+  -o-animation: changeColors 30s ease infinite;
+  animation: changeColors 30s ease infinite;
+}
+
+@-webkit-keyframes changeColors {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@keyframes changeColors {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+/*-------------------- Formulário de Cadastro de Sistemas -------------------*/
+.cadastro-systems {
   width: auto;
   text-align: center;
   position: relative;
   font-family: 'Numans', sans-serif;
 }
 
-#cadastro-systems h2 {
-  font: 20px 'Numans';
-  color: #1B2631;
-  width: 100%;
-  float: left;
-  text-align: left;
-  margin-bottom: 4%;
-  text-transform: uppercase;
-}
-
-#cadastro-systems fieldset {
+.cadastro-systems fieldset {
   background: white;
   border: 0 none;
   border-radius: 20px;
@@ -212,79 +289,86 @@ input:focus{
   padding: 20px 30px;
 
   box-sizing: border-box;
-  width: 80%;
-  margin: 0 10% 3%;
+  width: 60%;
+  margin: 0 auto 3%;
 }
 
-#cadastro-systems fieldset:not(:first-of-type) {
+.cadastro-systems fieldset:not(:first-of-type) {
   display: none;
 }
 
-#cadastro-systems label {
-  color: #707B7C;
+.cadastro-systems h2 {
+  font: 20px 'Numans';
+  color: #1B2631;
+  width: 100%;
+  float: left;
+  text-align: left;
+  margin-bottom: 4%;
+  text-transform: uppercase;
+}
+
+.cadastro-systems label, option {
   float: left;
   font: 14px 'Numans';
 }
 
-#cadastro-systems input, select, textarea {
+.cadastro-systems input, select, textarea {
   padding: 10px;
   border: 1px solid #B2BABB;
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
-  outline-color: #1B2631;
   box-sizing: border-box;
   width: 100%;
   font: 14px;
-  color: #1B2631;
   margin-bottom: 10px;
 }
 
-#cadastro-systems .acao {
-  width: 100px;
-  height: 43px;
-  background: #B2BABB;
-  color: white;
-  padding: 12px 0;
+p.help-block {
+  font: 10px 'Numans';
+  color: #B2BABB;
   float: left;
+}
+
+.cadastro-systems .acao {
+  padding: 12px 0;
   margin-right: 5%;
+  float: left;
+  outline: none;
 }
-
-#cadastro-systems .acao:hover {
+.cadastro-systems .anterior {
+  background: #B2BABB;
+}
+.cadastro-systems .anterior:hover {
   background: #707B7C;
-  cursor: pointer;
 }
-
-#cadastro-systems .salvar {
+.cadastro-systems .salvar {
   background: rgb(150, 230, 95);
-  border: 1px solid rgb(150, 230, 95);
 }
-
-#cadastro-systems .salvar:hover {
+.cadastro-systems .salvar:hover {
   background: #00CC33;
-  cursor: pointer;
 }
 
-#cadastro-systems #progress {
+#progress {
   overflow: hidden;
   width: 50%;
   margin: auto;
-  padding: 3%;
+  padding: 100px 0 10px 18%;
   counter-reset: step;
 }
 
-#cadastro-systems #progress li {
+#progress li {
   list-style-type: none;
   color: #1B2631;
+  text-align: center;
   font-weight: bold;
-  text-transform: uppercase;
   font-size: 10px;
   float: left;
   width: 11.11%;
   position: relative;
 }
 
-#cadastro-systems #progress li:after {
+#progress li:after {
   content: '';
   width: 100%;
   background: #B2BABB;
@@ -296,7 +380,7 @@ input:focus{
   z-index: -1;
 }
 
-#cadastro-systems #progress li:before {
+#progress li:before {
   content: counter(step);
   counter-increment: step;
   width: 20px;
@@ -311,15 +395,175 @@ input:focus{
   margin: 0 auto 10px auto;
 }
 
-#cadastro-systems #progress li:first-child:after {
+#progress li:first-child:after {
   content: none;
 }
 
-#cadastro-systems #progress li.ativo:after, #cadastro-systems #progress li.ativo:before {
+#progress li.ativo:after, #progress li.ativo:before {
   background: rgba(229, 57, 53, 0.9);
 }
 
-/*----------------------------------------Card Systems----------------------------------------*/
+/*-------------------- Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 70px;
+  height: 30px;
+  margin: 0 0 0 50px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 10px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input.default:checked + .slider {
+  background-color: #444;
+}
+input.primary:checked + .slider {
+  background-color: #2196F3;
+}
+input.success:checked + .slider {
+  background-color: #8bc34a;
+}
+input.info:checked + .slider {
+  background-color: #3de0f5;
+}
+input.warning:checked + .slider {
+  background-color: #FFC107;
+}
+input.danger:checked + .slider {
+  background-color: #f44336;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 70px;
+  height: 30px;
+  margin: 5px 0 7px 50px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f2f2f2;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  z-index: 2;
+  content: "";
+  height: 22.5px;
+  width: 22.5px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #707B7C;
+      -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+  -webkit-transition: .4s;
+  transition: all 0.4s ease-in-out;
+}
+.slider:after {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  content: "Exibir";
+    font-size: 12px;
+    text-align: left !important;
+    line-height: 30px;
+  padding-left: 0;
+    width: 70px;
+    color: #fff;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #3366FF;
+    -webkit-transform: translateX(-40px);
+    -ms-transform: translateX(-40px);
+    transform: translateX(-40px);
+    transition: all 0.4s ease-in-out;
+}
+
+input:checked + .slider:after {
+  -webkit-transform: translateX(0px);
+  -ms-transform: translateX(0px);
+  transform: translateX(0px);
+  padding-left: 7px;
+}
+
+input:checked + .slider:before {
+  background-color: #fff;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(40px);
+  -ms-transform: translateX(40px);
+  transform: translateX(40px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 100px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.absolute-no {
+	position: absolute;
+	left: 0;
+	color: darkslategrey;
+	text-align: right !important;
+    font-size: 12px;
+    width: calc(100% - 12.5px);
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+/*--------------------------------------Card Systems----------------------------------------*/
 .profile-card {
   background: rgba(229, 57, 53, 0.9);
   width: 56px;
@@ -328,8 +572,8 @@ input:focus{
   position: relative;
   z-index: 2;
   overflow: hidden;
-  -webkit-transform: translate(5%, -45%);
-  transform: translate(5%, -45%);
+  -webkit-transform: translate(0, -45%);
+  transform: translate(0, -45%);
   -webkit-border-radius: 50%;
   border-radius: 50%;
   -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);

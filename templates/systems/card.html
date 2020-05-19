@@ -1,0 +1,51 @@
+{% load filters %}
+
+{% if systems_list %}
+    <div class="row justify-content-start">
+
+        {% for system in systems_list %}
+            <div class="col">
+                <aside class="profile-card">
+
+                    <header>
+                        <div id="criticidade">
+                            <a href="#">{{ system.criticidade.all.0.nivel_Criticidade }}</a>
+                        </div>
+
+                        <div id="status-sistema">
+                            <h1><span>{{ system.sistema }}</span></h1>
+                        </div>
+                    </header>
+                
+                    <div class="profile-bio">
+                        <p>
+                            Contingenciado pelo Usuário: {{ system.contingencia.all.0.contingencia_Usuario }}
+                            <BR>
+                            Reestabelecimento Proposto: {{ system.impactos_negocio.all.0.RTO_Usuario }} HR(s)
+                            <BR>
+                            <BR>
+                            Infraestrutura de Contingencia:
+                                <BR>
+                                Camada do Balanceador: {{ system.infraestrutura.all.0.camada_balanceador }}
+                                <BR>
+                                Camada da Aplicação: {{ system.infraestrutura.all.0.camada_aplicacao }}
+                                <BR>
+                                Camada do Banco de Dados: {{ system.infraestrutura.all.0.camada_banco_dados }}
+                            <BR>
+                            <BR>
+                            RTO: {{ system.criticidade.all.0.RTO }}
+                        </p>
+                    </div>
+                
+                    <ul class="profile-social-links">
+                        <li>
+                            <a href="#">Infraestrutura</a>
+                        </li>
+                    </ul>
+
+                </aside>
+            </div>
+        {% endfor %}  
+
+    </div>
+{% endif %}

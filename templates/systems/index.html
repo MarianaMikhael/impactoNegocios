@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load static %}
+
+
+{% block title %}Nível de Criticidade {% endblock %}
+
+<div class="container-fluid" id="content-page">
+    {% block main %}
+
+        <section>
+            <div class="container-fluid" id="content-page">
+
+                {% block card %}
+                    {% include './card.html' %}
+                {% endblock %}
+            
+            </div>
+        </section>
+
+        <!--Botão de Cadastro-->
+        <a href="{% url 'new_system' %}" class="btn-float" id="novo-cadastro">
+            <i class="fa fa-plus"></i>
+        </a>
+
+        <!--Botão voltar para index-->
+        <a href="{% url 'home' %}" class="btn-float" id="home">
+            <i class="fa fa-home"></i>
+        </a>
+
+    {% endblock %}
+</div>
+
+{% block footer %}
+    {% include 'includes/seta-topo.html' %}
+    {% include 'includes/footer.html' %}
+{% endblock %}

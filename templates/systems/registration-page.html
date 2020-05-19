@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load static %}
+
+{% load i18n%}
+
+{% block title %} Sistemas | Cadastro {% endblock %}
+
+
+ <div class="container-fluid" id="content-page">
+    {% block main %}
+
+    <div class="cadastro-systems">
+        
+        <section>
+            <ul id='progress'>
+                <li class="ativo"> </li>
+                <li> </li>
+                <li> </li>
+                <li> </li>
+            </ul>
+        </section>
+
+        <div class="erros"> </div>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <fieldset>
+                <div class="form-row">
+                    <div class="form-group col-md-10 mb-0">
+                        <h2>Aplicação</h2>
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                        <label class="switch">
+                            <input type="checkbox" checked {{ system_form.ativo }} />
+                            <span class="slider round"></span>
+                            <span class="absolute-no">Off</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ system_form.sistema|bootstrap }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ system_form.fk_Cadeia_Servico|bootstrap }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ system_form.fk_Responsavel_Dev|bootstrap }}
+                </div>
+                <div class="form-group">
+                    {{ system_form.fk_Responsavel_Sup|bootstrap }}
+                </div>
+                <div class="form-group">
+                    {{ system_form.descricao|bootstrap }}
+                </div>
+                <button type="button" name="next1" class="next acao">Continuar</button>
+            </fieldset>
+
+            <fieldset>
+                <!-- <div>
+                    <h2>Infraestrutura</h2>
+                </div> -->
+                <div class="form-group">
+                    {{ infra_form.camada_balanceador|bootstrap }}
+                </div>
+                <div class="form-group">
+                    {{ infra_form.camada_aplicacao|bootstrap }}
+                </div>
+                <div class="form-group">
+                    {{ infra_form.camada_banco_dados|bootstrap }}
+                </div>
+                <div class="form-group">
+                    {{ infra_form.impacto_Direto|bootstrap }}
+                </div>
+                <div class="form-group">
+                    {{ infra_form.impacto_Indireto|bootstrap }}
+                </div>
+                <button type="button" name="prev" class="prev acao anterior">Anterior</button>
+                <button type="button" name="next2" class="next acao">Continuar</button>
+            </fieldset>
+
+            <fieldset>
+                <!-- <div>
+                    <h2>Continuidade Tecnológica</h2>
+                </div> -->
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ cont_form.disp_balanceador|bootstrap }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ cont_form.conting_balanceador|bootstrap }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ cont_form.disp_aplicacao|bootstrap }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ cont_form.conting_aplicacao|bootstrap }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ cont_form.disp_banco_dados|bootstrap }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ cont_form.conting_banco_dados|bootstrap }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-0">
+                        {{ cont_form.plano_De_Recup_Doc|bootstrap }}
+                    </div>
+                    <div class="form-group col-md-6 mb-0">
+                        {{ cont_form.plano_De_Recup_Test|bootstrap }}
+                    </div>
+                </div>
+                <div class="form-group">
+                        {{ cont_form.url_Ficheiro|bootstrap }}
+                </div>
+                <button type="button" name="prev" class="prev acao anterior">Anterior</button>
+                <button type="button" name="next3" class="next acao">Continuar</button>
+            </fieldset>
+
+            <fieldset>
+                <!-- <div>
+                    <h2>Nível de Criticidade</h2>
+                </div> -->
+                <div class="form-row">
+                    <div class="form-group col-md-8 mb-0">
+                        {{ crit_form.nivel_Criticidade|bootstrap }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                        {{ crit_form.RTO|bootstrap }}
+                    </div>
+                </div>
+                <button type="button" name="prev" class="prev acao anterior">Anterior</button>
+                <button type="submit" class="acao salvar">Finalizar</button>
+            </fieldset>
+
+        </form>
+                                                                                                                                                                                                                                              
+    </div>
+
+    {% endblock %}
+</div>
+
+
+{% block footer %}
+    {% include 'includes/btn-return.html' %}
+    {% include 'includes/seta-topo.html' %}
+    {% include 'includes/footer.html' %}
+{% endblock %}

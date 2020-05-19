@@ -1,0 +1,12 @@
+<div class="erros"> </div>
+
+<!--enctype faz o envio de fotos ou arquivos em geral através
+do form, sem ele só é possível envio de texto, sem anexo.-->
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset>
+        <h2>Impactos de Negócio</h2>
+        {{ formImpacts }}
+        <button type="submit" class="acao salvar">Salvar e Continuar</button>
+    </fieldset>
+</form>

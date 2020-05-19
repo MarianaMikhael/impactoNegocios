@@ -29,6 +29,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
 
+
 # Custom User Model
 AUTH_USER_MODEL = 'account.User'
 
